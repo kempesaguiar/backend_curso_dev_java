@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import br.com.kca.api.dto.ClientCreateDTO;
 
 @Entity
 @Table(name = "clientes")
@@ -16,7 +19,8 @@ public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "id", sequenceName = "cliente_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Column(nullable = false, length = 160)
@@ -27,6 +31,16 @@ public class Cliente implements Serializable {
 	
 	@Column(nullable = true, length = 60)
 	private String telefone;
+	
+	public Cliente() {
+		
+	}
+	
+	public Cliente(ClientCreateDTO clientCreateDTO) {
+		this.nome = clientCreateDTO.getNome();
+		this.email = clientCreateDTO.getEmail();
+		this.telefone = clientCreateDTO.getTelefone();
+	}
 
 	public Long getId() {
 		return id;
