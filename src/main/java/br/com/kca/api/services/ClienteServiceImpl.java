@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.kca.api.dto.ClientCreateDTO;
 import br.com.kca.api.dto.ClienteShowDTO;
+import br.com.kca.api.exception.ClienteNotFoundException;
 import br.com.kca.api.mapper.MapStructClienteMapper;
 import br.com.kca.api.models.Cliente;
 import br.com.kca.api.repositories.ClienteRepository;
@@ -40,6 +41,31 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente novocliente = mapper.toModel(clientCreateDTO);
 		Cliente response = clienteRepository.save(novocliente);
 		return mapper.clienteToClienteShowDTO(response);
+	}
+
+	@Override
+	public ClienteShowDTO listaClienteUnico(Long id) throws ClienteNotFoundException {
+		Cliente cliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException(id));
+		return mapper.clienteToClienteShowDTO(cliente);
+	}
+
+	@Override
+	public ClienteShowDTO atualizaCliente(Long id, ClientCreateDTO clientCreateDTO) throws ClienteNotFoundException {
+		Cliente atualizaCliente = mapper.toModel(clientCreateDTO);
+		Cliente buscacliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException(id));
+		atualizaCliente.setId(id);
+		Cliente response = clienteRepository.save(atualizaCliente);
+		return mapper.clienteToClienteShowDTO(atualizaCliente);
+	}
+
+	@Override
+	public void excluir(Long id) throws ClienteNotFoundException {
+		Cliente cliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException(id));
+		clienteRepository.deleteById(id);
+		
 	}
 	
 	
