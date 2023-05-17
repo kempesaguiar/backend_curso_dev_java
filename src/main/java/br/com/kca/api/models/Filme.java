@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.kca.api.dto.FilmCreateDTO;
+
 @Entity
 @Table(name = "filmes")
 public class Filme implements Serializable {
@@ -30,6 +32,11 @@ public class Filme implements Serializable {
 	
 	public Filme() {
 		
+	}
+	
+	public Filme(FilmCreateDTO filmCreateDTO) {
+		this.nome = filmCreateDTO.getNome();
+		this.genero = filmCreateDTO.getGenero();
 	}
 
 	public Long getId() {
