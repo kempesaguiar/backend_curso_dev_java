@@ -11,16 +11,16 @@ public interface FilmeService {
 	// Lista todos os filmes
 	List<FilmShowDTO> listar();
 	
-	//Criar Filme
+	// Criar filmes
 	FilmShowDTO createFilme(FilmCreateDTO filmCreateDTO);
 	
-	// Lista filme por ID
-	FilmShowDTO listaFilmeUnico(Long id) throws FilmeNotFoundException;
+	// Listar filme por ID
+	FilmShowDTO listarFilmeUnico(Long id) throws FilmeNotFoundException;
 	
-	// Atualiza filme por ID
+	// Atualiar Filme
 	FilmShowDTO atualizarFilme(Long id, FilmCreateDTO filmCreateDTO) throws FilmeNotFoundException;
 	
-	// Exclui filme por id
+	// Deleta Filme
 	void excluirFilme(Long id) throws FilmeNotFoundException;
 	
 	

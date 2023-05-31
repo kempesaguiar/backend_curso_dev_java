@@ -20,14 +20,14 @@ public class Filme implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "id", sequenceName = "filme_id")
+	@SequenceGenerator(name = "filme_id", sequenceName = "filme_id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
 	@Column(nullable = false, length = 160)
 	private String nome;
 	
-	@Column(nullable = false, length = 80)
+	@Column(nullable = false, length = 180)
 	private String genero;
 	
 	public Filme() {

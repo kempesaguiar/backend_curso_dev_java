@@ -41,7 +41,7 @@ public class FilmeServiceImpl implements FilmeService {
 	}
 
 	@Override
-	public FilmShowDTO listaFilmeUnico(Long id) throws FilmeNotFoundException {
+	public FilmShowDTO listarFilmeUnico(Long id) throws FilmeNotFoundException {
 		Filme filme = filmeRepository.findById(id)
 				.orElseThrow(() -> new FilmeNotFoundException(id));
 		return filmeMapper.toDTO(filme);
@@ -64,7 +64,5 @@ public class FilmeServiceImpl implements FilmeService {
 		filmeRepository.deleteById(id);
 		
 	}
-	
-	
 
 }
