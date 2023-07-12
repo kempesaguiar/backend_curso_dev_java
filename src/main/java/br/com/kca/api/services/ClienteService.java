@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.kca.api.dto.ClientCreateDTO;
 import br.com.kca.api.dto.ClienteShowDTO;
+import br.com.kca.api.dto.LoginDTO;
 import br.com.kca.api.exception.ClienteNotFoundException;
 
 public interface ClienteService {
@@ -18,6 +19,9 @@ public interface ClienteService {
 	ClienteShowDTO atualizaCliente(Long id, ClientCreateDTO clientCreateDTO) throws ClienteNotFoundException;
 	
 	void excluir(Long id) throws ClienteNotFoundException;
+	
+	ClienteShowDTO login(LoginDTO loginDTO) throws ClienteNotFoundException;
+
 	
 	
 }

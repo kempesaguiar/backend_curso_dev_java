@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.kca.api.dto.ClientCreateDTO;
 import br.com.kca.api.dto.ClienteShowDTO;
+import br.com.kca.api.dto.LoginDTO;
 import br.com.kca.api.exception.ClienteNotFoundException;
 import br.com.kca.api.mapper.MapStructClienteMapper;
 import br.com.kca.api.models.Cliente;
@@ -66,6 +67,14 @@ public class ClienteServiceImpl implements ClienteService {
 				.orElseThrow(() -> new ClienteNotFoundException(id));
 		clienteRepository.deleteById(id);
 		
+	}
+
+	@Override
+	public ClienteShowDTO login(LoginDTO loginDTO) throws ClienteNotFoundException {
+		Long id = clienteRepository.findByLogin(loginDTO.getEmail(), loginDTO.getTelefone());
+		Cliente buscaCliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new ClienteNotFoundException(id));
+		return mapper.clienteToClienteShowDTO(buscaCliente);
 	}
 	
 	

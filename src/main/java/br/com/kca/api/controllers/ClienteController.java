@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.kca.api.dto.ClientCreateDTO;
 import br.com.kca.api.dto.ClienteShowDTO;
+import br.com.kca.api.dto.LoginDTO;
 import br.com.kca.api.exception.ClienteNotFoundException;
 import br.com.kca.api.services.ClienteService;
 
@@ -73,5 +74,11 @@ public class ClienteController {
 		clienteService.excluir(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Cliente " + id + " excluído com sucesso ");
 		
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<ClienteShowDTO> login(@RequestBody LoginDTO loginDTO) throws ClienteNotFoundException {
+		ClienteShowDTO response = clienteService.login(loginDTO);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }
