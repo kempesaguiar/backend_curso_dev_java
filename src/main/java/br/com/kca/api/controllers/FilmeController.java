@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import br.com.kca.api.dto.FilmShowDTO;
 import br.com.kca.api.exception.FilmeNotFoundException;
 import br.com.kca.api.services.FilmeService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/filmes")
 public class FilmeController {
@@ -58,6 +60,12 @@ public class FilmeController {
 	public ResponseEntity<String> excluir(@PathVariable Long id) throws FilmeNotFoundException {
 		filmeService.excluirFilme(id);
 		return ResponseEntity.status(HttpStatus.OK).body("Filme " + id + " excluído com sucesso");
+	}
+	
+	@GetMapping("/disponiveis")
+	public ResponseEntity<List<FilmShowDTO>> listarDisponiveis() {
+		List<FilmShowDTO> filmes = filmeService.listarDisponiveis();
+		return ResponseEntity.status(HttpStatus.OK).body(filmes);
 	}
 
 }

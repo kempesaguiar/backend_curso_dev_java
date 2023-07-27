@@ -11,6 +11,9 @@ public interface FilmeService {
 	// Lista todos os filmes
 	List<FilmShowDTO> listar();
 	
+	// Lista filmes disponíveis
+	List<FilmShowDTO> listarDisponiveis();
+	
 	// Criar filmes
 	FilmShowDTO createFilme(FilmCreateDTO filmCreateDTO);
 	

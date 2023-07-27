@@ -11,6 +11,7 @@ public class FilmShowDTO implements Serializable {
 	private Long id;
 	private String nome;
 	private String genero;
+	private String status;
 	
 	public FilmShowDTO() {
 		
@@ -20,6 +21,15 @@ public class FilmShowDTO implements Serializable {
 		this.id = filme.getId();
 		this.nome = filme.getNome();
 		this.genero = filme.getGenero();
+		this.status = filme.getStatus();
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Long getId() {

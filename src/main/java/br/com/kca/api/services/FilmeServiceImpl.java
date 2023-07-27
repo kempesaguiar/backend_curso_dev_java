@@ -36,6 +36,7 @@ public class FilmeServiceImpl implements FilmeService {
 	@Override
 	public FilmShowDTO createFilme(FilmCreateDTO filmCreateDTO) {
 		Filme salva = filmeMapper.toModel(filmCreateDTO);
+		salva.setStatus("Disponível");
 		Filme filme = filmeRepository.save(salva);
 		return filmeMapper.toDTO(filme);
 	}
@@ -63,6 +64,16 @@ public class FilmeServiceImpl implements FilmeService {
 				.orElseThrow(() -> new FilmeNotFoundException(id));
 		filmeRepository.deleteById(id);
 		
+	}
+
+
+	@Override
+	public List<FilmShowDTO> listarDisponiveis() {
+		return this.filmeRepository.findAll()
+				.stream()
+				.filter(filme -> filme.getStatus().equals("Disponível"))
+				.map(filme -> this.filmeMapper.toDTO(filme))
+				.collect(Collectors.toList());
 	}
 
 }

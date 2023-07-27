@@ -56,6 +56,7 @@ public class LocacaoServiceImpl implements LocacaoService {
 				.orElseThrow(() -> new FilmeNotFoundException(filme_id));
 		Locacao locacao = locacaoMapper.toModel(locacaoCreateDTO);
 		locacao.setCliente(cliente);
+		filme.setStatus("Alugado");
 		locacao.setFilme(filme);
 		Locacao response = locacaoRepository.save(locacao);
 		return locacaoMapper.toDTO(response);
