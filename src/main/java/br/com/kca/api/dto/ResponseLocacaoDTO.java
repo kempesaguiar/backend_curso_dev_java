@@ -15,18 +15,24 @@ public class ResponseLocacaoDTO implements Serializable {
 	private Filme filme;
 	private String data;
 	private String valor;
+	private String status;
 	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
 	public ResponseLocacaoDTO() {
 		
 	}
-	
-	public ResponseLocacaoDTO(Long id, Cliente cliente, Filme filme, String data, String valor) {
-		this.id = id;
-		this.cliente = cliente;
-		this.filme = filme;
-		this.data = data;
-		this.valor = valor;
-	}
+
 	
 	public ResponseLocacaoDTO(Locacao locacao) {
 		this.id = locacao.getId();
@@ -34,6 +40,7 @@ public class ResponseLocacaoDTO implements Serializable {
 		this.filme = locacao.getFilme();
 		this.data = locacao.getData();
 		this.valor = locacao.getValor();
+		this.status = locacao.getStatus();
 	}
 
 	public Long getId() {

@@ -1,6 +1,7 @@
 package br.com.kca.api.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,9 +58,27 @@ public class LocacaoServiceImpl implements LocacaoService {
 		Locacao locacao = locacaoMapper.toModel(locacaoCreateDTO);
 		locacao.setCliente(cliente);
 		filme.setStatus("Alugado");
+		locacao.setStatus("alugado");
 		locacao.setFilme(filme);
 		Locacao response = locacaoRepository.save(locacao);
 		return locacaoMapper.toDTO(response);
+	}
+
+	@Override
+	public ResponseLocacaoDTO devolveLocacao(Long id) throws FilmeNotFoundException {
+		Locacao locacao = locacaoRepository.findById(id)
+				.orElseThrow(() -> new FilmeNotFoundException(id));
+		Long filme_id = locacao.getFilme().getId();
+	
+		Filme filme = filmeRepository.findById(filme_id)
+				.orElseThrow(() -> new FilmeNotFoundException(filme_id));
+		filme.setStatus("Disponível");
+		filme.setId(filme_id);
+		filmeRepository.save(filme);
+		locacao.setStatus("devolvido");
+		locacaoRepository.save(locacao);
+		return locacaoMapper.toDTO(locacao);
+		
 	}
 
 }

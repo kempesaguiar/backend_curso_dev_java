@@ -38,6 +38,19 @@ public class Locacao {
 	@Column(nullable = false, length = 60)
 	private String valor;
 	
+	@Column(nullable = false, length = 60)
+	private String status;
+	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Locacao() {
 		
 	}

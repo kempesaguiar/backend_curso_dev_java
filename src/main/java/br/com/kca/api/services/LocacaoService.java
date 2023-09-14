@@ -13,4 +13,6 @@ public interface LocacaoService {
 	
 	ResponseLocacaoDTO createLocacao(LocacaoCreateDTO locacaoCreateDTO) throws FilmeNotFoundException, ClienteNotFoundException; 
 
+	ResponseLocacaoDTO devolveLocacao(Long id) throws FilmeNotFoundException;
+
 }
